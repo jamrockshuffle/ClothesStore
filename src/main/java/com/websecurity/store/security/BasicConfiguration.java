@@ -42,7 +42,7 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
                         "/swagger-resources/**",
                         "/configuration/security",
                         "/swagger-ui.html",
-                        "/webjars/**").permitAll()
+                        "/webjars/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/create", "/update", "/delete/*").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
