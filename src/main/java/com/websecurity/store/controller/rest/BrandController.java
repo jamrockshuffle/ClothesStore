@@ -5,6 +5,7 @@ import com.websecurity.store.model.Color;
 import com.websecurity.store.service.brand.BrandServiceImpl;
 import com.websecurity.store.service.color.ColorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class BrandController {
         return service.deleteById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public Brand create(@RequestBody Brand obj) {
 
