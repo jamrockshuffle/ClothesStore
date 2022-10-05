@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class StoreApplication {
 
+    // security isn't implemented on this branch (which is used as a backup)
+
     public static void main(String[] args) {
         SpringApplication.run(StoreApplication.class, args);
     }
