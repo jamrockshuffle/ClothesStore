@@ -37,13 +37,13 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/create", "/update", "/delete/*").hasRole("ADMIN")
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",
                         "/configuration/security",
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
+                .antMatchers("/create", "/update", "/delete/*").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

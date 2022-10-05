@@ -35,7 +35,6 @@ public class BrandController {
         return service.deleteById(id);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public Brand create(@RequestBody Brand obj) {
 
