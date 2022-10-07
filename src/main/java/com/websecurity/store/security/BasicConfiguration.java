@@ -12,14 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-/**
- * Username and Password information for login
- *
- * @Autor: Kolja
- * @Date: 05.05.2021
- * @Version: BasicConfiguration: 1.0
- */
-
 @Configuration
 @EnableWebSecurity
 public class BasicConfiguration extends WebSecurityConfigurerAdapter {
@@ -37,19 +29,21 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/v2/api-docs",
-                        "/configuration/ui",
-                        "/swagger-resources/**",
-                        "/configuration/security",
-                        "/swagger-ui.html",
-                        "/webjars/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/create", "/update", "/delete/*").hasRole("ADMIN")
+                .antMatchers("/api/*/create", "/api/*/update",
+                        "/api/*/delete/*").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();
 
     }
+
+    /*.antMatchers("/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**").permitAll()*/
 
     @Override
     @Bean
