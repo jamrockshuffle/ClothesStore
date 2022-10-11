@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class StoreApplication {
 
+    // this branch contains basic, no-db, in-memory security
+
     public static void main(String[] args) {
         SpringApplication.run(StoreApplication.class, args);
     }
