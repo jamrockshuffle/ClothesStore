@@ -54,7 +54,7 @@ public class AuthService {
         var user = User.builder()
                 .username(request.getUsername())
                 .password(encoder.encode(request.getPassword()))
-                .roles(mapRoles(request)).build();
+                .roleIds(mapRoles(request)).build();
 
         userRepository.save(user);
 

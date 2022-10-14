@@ -5,7 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -15,9 +19,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Role {
 
     @Id
-    private Integer id;
+    private String id;
 
     private ERole name;
+
+    @DBRef(lazy = true)
+    private Set<User> userIds;
 
     public enum ERole {
         ROLE_USER,

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private String id;
 
     private String username;
 
@@ -37,7 +37,7 @@ public class UserDetailsImpl implements UserDetails {
                 .id(user.getId())
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .authorities(mapRolesToAuthorities(user.getRoles()))
+                .authorities(mapRolesToAuthorities(user.getRoleIds()))
                 .build();
     }
 

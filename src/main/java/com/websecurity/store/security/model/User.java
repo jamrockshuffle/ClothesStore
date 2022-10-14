@@ -22,7 +22,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    private Long id;
+    private String id;
 
     @NotBlank
     @Size(max = 20)
@@ -33,5 +33,5 @@ public class User {
     private String password;
 
     @DBRef(lazy = true)
-    private List<Role> role_ids;
+    private Set<Role> roleIds;
 }
