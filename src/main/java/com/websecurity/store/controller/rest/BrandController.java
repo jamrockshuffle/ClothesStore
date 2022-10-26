@@ -18,30 +18,35 @@ public class BrandController {
     BrandServiceImpl service;
 
     @RequestMapping("/find/all")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public List<Brand> findAll (){
 
         return service.findAll();
     }
 
     @GetMapping("/get/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public Brand getById(@PathVariable String id) {
 
         return service.findById(id);
     }
 
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Brand> deleteById(@PathVariable String id) {
 
         return service.deleteById(id);
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public Brand create(@RequestBody Brand obj) {
 
         return service.create(obj);
     }
 
     @PostMapping("/update")
+    @PreAuthorize("hasRole('ADMIN')")
     public Brand update(@RequestBody Brand obj) {
 
         return service.update(obj);

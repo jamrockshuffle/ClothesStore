@@ -5,6 +5,7 @@ import com.websecurity.store.model.DiscountCard;
 import com.websecurity.store.service.brand.BrandServiceImpl;
 import com.websecurity.store.service.discountcard.DiscountCardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,30 +18,35 @@ public class DiscountCardController {
     DiscountCardServiceImpl service;
 
     @RequestMapping("/find/all")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public List<DiscountCard> findAll (){
 
         return service.findAll();
     }
 
     @GetMapping("/get/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public DiscountCard getById(@PathVariable String id) {
 
         return service.findById(id);
     }
 
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<DiscountCard> deleteById(@PathVariable String id) {
 
         return service.deleteById(id);
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public DiscountCard create(@RequestBody DiscountCard obj) {
 
         return service.create(obj);
     }
 
     @PostMapping("/update")
+    @PreAuthorize("hasRole('ADMIN')")
     public DiscountCard update(@RequestBody DiscountCard obj) {
 
         return service.update(obj);
