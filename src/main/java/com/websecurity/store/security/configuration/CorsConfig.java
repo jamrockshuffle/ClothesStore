@@ -11,6 +11,7 @@ public class CorsConfig extends WebMvcConfigurationSupport {
         registry.addMapping("/api/*") // /**
                 .allowedOrigins("http://localhost:4444/")
                 .allowedMethods("GET", "POST")
+                .allowedHeaders("*")
                 .maxAge(3600)
                 .allowCredentials(true);
     }
