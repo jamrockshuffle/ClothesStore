@@ -3,6 +3,7 @@ package com.websecurity.store.security.controller;
 import com.websecurity.store.security.AuthService;
 import com.websecurity.store.security.dto.LoginRequest;
 import com.websecurity.store.security.dto.SignUpRequest;
+import com.websecurity.store.security.dto.SignUpRequestNoLogin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,6 +29,11 @@ public class AuthController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createUser(@Valid @RequestBody SignUpRequest request) {
         return ResponseEntity.ok(service.signUpUser(request));
+    }
+
+    @PostMapping("/signupnew")
+    public ResponseEntity<?> createUserNoLogin(@Valid @RequestBody SignUpRequestNoLogin request) {
+        return ResponseEntity.ok(service.signUpUserNoLogin(request));
     }
 
 }

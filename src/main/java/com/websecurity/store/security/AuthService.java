@@ -1,8 +1,6 @@
 package com.websecurity.store.security;
 
-import com.websecurity.store.security.dto.LoginResponse;
-import com.websecurity.store.security.dto.SignUpRequest;
-import com.websecurity.store.security.dto.LoginRequest;
+import com.websecurity.store.security.dto.*;
 import com.websecurity.store.security.dto.LoginResponse;
 import com.websecurity.store.security.model.Role;
 import com.websecurity.store.security.model.User;
@@ -67,8 +65,35 @@ public class AuthService {
         return "User was successfully created";
     }
 
+    public String signUpUserNoLogin(SignUpRequestNoLogin request) {
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new IllegalArgumentException("Username " + request.getUsername() + " already exists");
+        }
+
+        String id = String.valueOf(userRepository.findAll()
+                .stream()
+                .mapToInt(el -> Integer.parseInt(el.getId())).max().orElse(0) + 1);
+
+        var user = User.builder()
+                .id(id)
+                .username(request.getUsername())
+                .password(encoder.encode(request.getPassword()))
+                .roleIds(mapRolesNoLogin(request)).build();
+
+        userRepository.save(user);
+
+        return "User was successfully created";
+    }
+
 
     private Set<Role> mapRoles(SignUpRequest request) {
+        return request.getRoles()
+                .stream()
+                .map(this::mapStringToRole)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<Role> mapRolesNoLogin(SignUpRequestNoLogin request) {
         return request.getRoles()
                 .stream()
                 .map(this::mapStringToRole)
