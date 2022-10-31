@@ -1,4 +1,4 @@
-package com.websecurity.store.security.configuration;
+package com.websecurity.store.configuration;
 
 import com.google.common.cache.CacheBuilder;
 import org.springframework.beans.factory.annotation.Value;

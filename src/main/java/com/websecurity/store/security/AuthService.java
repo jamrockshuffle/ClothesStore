@@ -51,7 +51,13 @@ public class AuthService {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new IllegalArgumentException("Username " + request.getUsername() + " already exists");
         }
+
+        String id = String.valueOf(userRepository.findAll()
+                .stream()
+                .mapToInt(el -> Integer.parseInt(el.getId())).max().orElse(0) + 1);
+
         var user = User.builder()
+                .id(id)
                 .username(request.getUsername())
                 .password(encoder.encode(request.getPassword()))
                 .roleIds(mapRoles(request)).build();
