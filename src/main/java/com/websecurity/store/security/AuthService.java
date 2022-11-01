@@ -45,7 +45,7 @@ public class AuthService {
                 .build();
     }
 
-    public String signUpUser(SignUpRequest request) {
+    public User signUpUser(SignUpRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new IllegalArgumentException("Username " + request.getUsername() + " already exists");
         }
@@ -62,7 +62,7 @@ public class AuthService {
 
         userRepository.save(user);
 
-        return "User was successfully created";
+        return user;
     }
 
     public String signUpUserNoLogin(SignUpRequestNoLogin request) {
